@@ -61,6 +61,10 @@ macOS builds are signed and notarised and open normally. The Windows builds are 
 
 <!-- downloads:end -->
 
+## Video
+
+[![Ramdac: 8-bit palettes from any clip, for Resolume](docs/video-thumb.png)](https://www.youtube.com/watch?v=b2s7zsdTAH8)
+
 ## The one idea
 
 **The picture becomes an index buffer and a colour table.**
