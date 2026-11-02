@@ -188,7 +188,7 @@ are at 1280×720:
 | `tools/sweep.py` | all **21** controls measurably change the picture |
 | `tools/siblings.py` | teletext's eight, copperlist's ×17, and nesolume's Game Boy, NES and Spectrum: the same values |
 | shaders | all 9 compile through `glslc`, not only through Apple's driver |
-| the bundle | universal (`x86_64 arm64`), exports `plugMain`, ad-hoc signs; `oxbow` reports `SW Ramdac` / `RM01` / `effect` with 25 parameters and renders 120 frames through `plugMain` |
+| the bundle | universal (`x86_64 arm64`), exports `plugMain`, ad-hoc signs; `oxbow` reports `SW Ramdac` / `RM01` / `effect` with 26 parameters and renders 120 frames through `plugMain` |
 
 Each tolerance is worked out from what can legitimately move a value:
 
@@ -298,3 +298,7 @@ ffmpeg -i in.mov -vf fps=60 -f rawvideo -pix_fmt rgba - | ./build/rmtest --pipe 
 ## License
 
 MIT. See [LICENSE](LICENSE) and [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
+
+<!-- attributions:start -->
+This project is built on other people's work — see [ATTRIBUTIONS.md](ATTRIBUTIONS.md).
+<!-- attributions:end -->

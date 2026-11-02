@@ -65,12 +65,12 @@ jobs:
         run: cmake --build build --config Release --parallel
 
       # The shipped DLL, loaded as a host loads it: see tools/wincheck.ps1.
-      # -Params is the control table plus the About block (its text and three
+      # -Params is the control table plus the About block (its text and four
       # buttons); it changes whenever either does.
       - name: Check the DLL (Windows)
         if: runner.os == 'Windows'
         run: |
-          ./tools/wincheck.ps1 -Dll "build/Release/Ramdac.dll" -Name "SW Ramdac" -Id RM01 -Kind effect -Params 25
+          ./tools/wincheck.ps1 -Dll "build/Release/Ramdac.dll" -Name "SW Ramdac" -Id RM01 -Kind effect -Params 26
           if( $LASTEXITCODE ) { exit $LASTEXITCODE }
 
       - name: Derive version

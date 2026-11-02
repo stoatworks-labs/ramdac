@@ -2,7 +2,7 @@
     What a host sees of a built Windows DLL, with no GL and no Resolume.
 
         tools/wincheck.ps1 -Dll build/Release/Ramdac.dll -Name "SW Ramdac" -Id RM01 `
-                           -Kind effect -Params 25
+                           -Kind effect -Params 26
 
     It LOADS the DLL (so a missing runtime or dependency fails here, where
     dumpbin cannot see it), finds plugMain, and asks it what Resolume asks

@@ -58,9 +58,11 @@ The passes (`Shaders.h`):
     `rl_nsis --ffgl`.
   - The workflows exist because the repo is public: the fleet rule is no workflows
     on a private repo.
-  - `source/StoatworksAbout.h` and `ATTRIBUTIONS.md` started as hand copies. The
-    backend's `sync-about.py` and `sync-attributions.py --adopt` generate them once
-    ramdac is registered; the backend's lists were seeded from the hand file.
+  - `source/StoatworksAbout.h` and `ATTRIBUTIONS.md` started as hand copies. Since
+    registration (2026-11-02) the backend's `sync-about.py` and
+    `sync-attributions.py` generate them; its attribution lists were seeded from
+    the hand file. The generated About has a guide link, so it has four buttons and
+    the DLL 26 parameters (`wincheck.ps1 -Params 26`).
 - **What it doesn't redo.**
   - **nesolume** has console rasters, attribute clash, HAM and broken VRAM. Ramdac has
     no attribute cells and no machine raster; Pixel Size is a plain grid.
