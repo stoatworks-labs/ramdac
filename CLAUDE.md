@@ -23,7 +23,7 @@ table's swap/cycle arithmetic, or any tolerance in the harness.
 - The README's figures: `python3 tools/figures.py` (Arena's bundled `IntoTheGlow_02`, ffmpeg, Pillow)
 
 ## Verify
-- Everything: `tools/verify.sh` takes about fifteen minutes. It runs:
+- Everything: `tools/verify.sh` takes about eight minutes. It runs:
   - greps for GLSL reserved words, trig and anything WebGL2 lacks;
   - `glslc` on all 9 shaders;
   - the FFGL pin, then a fresh universal build;

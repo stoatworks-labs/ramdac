@@ -161,8 +161,9 @@ on the website. Measured offline on one Mac (2026-11-02).
 
 `tools/verify.sh` passes on this machine (Apple Silicon, macOS 26) against a fresh
 universal Release build. It runs every picture check at **two rasters**, 1280×720 and
-320×180, and again on **Apple's software renderer** at 320×180. Numbers below are at
-1280×720:
+320×180, and again on **Apple's software renderer** at 320×180, where all 15 picture
+checks pass too (158 judgements). The whole run takes about eight minutes. Numbers below
+are at 1280×720:
 
 | check | result |
 | --- | --- |
@@ -201,16 +202,18 @@ GPU is shared with other work, so the small numbers wobble from run to run.
 
 | | 720p | 1080p | 4K |
 | --- | --- | --- | --- |
-| None | 0.09 | 0.22 | 1.69 |
-| Bayer 4 | 0.25 | 0.49 | 2.81 |
-| Bayer 8 | 0.69 | 1.27 | 5.25 |
-| Blue Noise | 0.69 | 1.24 | 4.92 |
-| Dot Diffusion | 2.41 | 3.10 | 4.36 |
-| Adaptive 16, Bayer 4 | 2.91 | 4.29 | 6.77 |
+| None | 0.26 | 0.42 | 1.52 |
+| Bayer 4 | 0.95 | 1.32 | 2.37 |
+| Bayer 8 | 1.34 | 1.60 | 5.41 |
+| Blue Noise | 0.72 | 1.42 | 5.35 |
+| Dot Diffusion | 3.34 | 3.65 | 4.19 |
+| Adaptive 16, Bayer 4 | 2.98 | 3.12 | 6.09 |
 
-In milliseconds. Dot Diffusion's 128 small draws make it cost about the same at every
-size. Adaptive adds a synchronous read-back and k-means on the CPU (wall time about
-0.3 ms more). macOS figures only.
+In milliseconds, from `verify.sh`'s own run. An earlier run on a quieter GPU measured
+None at 0.09 ms and Bayer 4 at 0.25 ms at 720p, and Dot Diffusion at 2.41. The 4K figures
+agree to within a fifth. Dot Diffusion's 128 small draws make it cost about the same at
+every size. Adaptive adds a synchronous read-back and k-means on the CPU, about 0.3 ms
+more wall time. macOS figures only.
 
 ### Not established
 
