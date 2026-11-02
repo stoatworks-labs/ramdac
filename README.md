@@ -28,6 +28,9 @@ bundled `IntoTheGlow_02`, 1.67 s in at 640×360 and Pixel Size 2. The Adaptive p
 Adapt 0: the clip strobes, and at the default 0.3 s the palette is still following the
 flash.</sub>
 
+<!-- downloads:start -->
+<!-- downloads:end -->
+
 ## The one idea
 
 **The picture becomes an index buffer and a colour table.**
@@ -154,8 +157,8 @@ second over the whole table.
 
 ## Status
 
-**v0.1.0**, a local build. It hasn't been released, isn't on GitHub and isn't registered
-on the website. Measured offline on one Mac (2026-11-02).
+**v0.1.0**, being prepared for its first release. Measured offline on one Mac
+(2026-11-02).
 
 ### Measured offline, on macOS
 

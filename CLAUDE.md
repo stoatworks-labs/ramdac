@@ -53,7 +53,7 @@ table's swap/cycle arithmetic, or any tolerance in the harness.
 - No dead controls: `python3 tools/sweep.py` (21 swept, all live; `--bare` lists the 12 that only act in a context).
 - Shared colours: `python3 tools/siblings.py` (teletext, copperlist and nesolume, when they're checked out).
 - Render cost: `./build/rmtest --bench`.
-- No CI and no release workflow: the repo is local-only, with no remote (AGENTS.md says why). `tools/wincheck.ps1` loads a built DLL as a host does. It checks the name, ID, type and parameter count; `-Params 25` is the 21 controls plus the About text and three buttons. Change it whenever the control table changes.
+- CI (`.github/workflows/ci.yml`): a macOS arm64 build with `rmtest --list`, `--offline` and glslc, and an MSVC build. `release.yml` builds the universal bundle and the Windows DLL, runs `tools/wincheck.ps1` on the DLL, and publishes only on a `v*` tag; dispatching it builds without publishing. `tools/wincheck.ps1` loads a built DLL as a host does. It checks the name, ID, type and parameter count; `-Params 25` is the 21 controls plus the About text and three buttons. Change it whenever the control table changes.
 
 ## Notes
 - **The table is built on the CPU every frame** (`Clut.h`), in double, from the palette, the swap, the cycle and the DAC. The GPU only ever sees 16 RGB entries and an index texture.

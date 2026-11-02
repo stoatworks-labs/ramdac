@@ -48,19 +48,19 @@ The passes (`Shaders.h`):
   - Bundle `com.stoatworks.ffgl.ramdac`, harness `rmtest`.
 - **Where it lives.** Built in `~/dev/ramdac` (the worktree guard blocks a new repo
   under `~/Projects` before it exists), then moved to `~/Projects/resolume/ramdac` as
-  its own git repo on `main`, as slitscan was. No remote.
-- **Nothing outward.** No GitHub repo, push, tag, release, website or backend
-  registration, or social: releasing needs Allan's go-ahead. So:
-  - **No `.github/` at all.** Slitscan's workflows were deleted, not adapted. A
-    private repo's Actions minutes are shared and scarce, and the fleet rule is no
-    workflows on private repos. Add CI and release workflows only if the repo is
-    made public.
-  - **`StoatworksAbout.h` is a provisional hand copy** of slitscan's generated one. It
-    has links (page, repo) that don't exist yet and no guide, so the About block has
-    three buttons, not four, and `wincheck.ps1 -Params 25` says so.
-  - **`ATTRIBUTIONS.md` is hand-written.** stoatworks-backend's sync scripts should
-    replace both once ramdac is registered, and its master lists should start from
-    this file.
+  its own git repo on `main`, as slitscan was. Public at
+  [stoatworks-labs/ramdac](https://github.com/stoatworks-labs/ramdac) since
+  2026-11-02, when Allan gave the go-ahead to release it.
+- **The release plumbing is slitscan's, from its origin/main.**
+  - `.github/workflows/ci.yml` and `release.yml` were copied after slitscan's
+    installer fix (08b5214) and renamed; their history comments were rewritten for
+    ramdac. `scripts/release-lib.sh` is the backend's current copy, which has
+    `rl_nsis --ffgl`.
+  - The workflows exist because the repo is public: the fleet rule is no workflows
+    on a private repo.
+  - `source/StoatworksAbout.h` and `ATTRIBUTIONS.md` started as hand copies. The
+    backend's `sync-about.py` and `sync-attributions.py --adopt` generate them once
+    ramdac is registered; the backend's lists were seeded from the hand file.
 - **What it doesn't redo.**
   - **nesolume** has console rasters, attribute clash, HAM and broken VRAM. Ramdac has
     no attribute cells and no machine raster; Pixel Size is a plain grid.
@@ -296,8 +296,7 @@ purpose.
 - **Never loaded into Resolume**, on either platform.
   - Never built for Windows, so `tools/wincheck.ps1` is untested.
   - No Arena gate expectation in plugin-bench.
-- **No CI or release workflow** (see the decisions above). No browser demo, presets or
-  user guide.
+- No browser demo, presets or user guide yet.
 - **Not built:**
   - several cycle ranges at once;
   - Floyd–Steinberg proper (serial both ways);
