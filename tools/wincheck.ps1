@@ -85,7 +85,7 @@ for( $i = 0; $i -lt $count; $i++ )
     $names += [Runtime.InteropServices.Marshal]::PtrToStringAnsi( $p )
 }
 Check ( $count -eq $Params ) "$count parameters (expected $Params): $( $names[0] ) .. $( $names[-1] )"
-Check ( $names[0] -eq 'Mode' -and $names -contains 'Scan Time' -and $names -contains 'About' ) 'Mode first; Scan Time and About among them'
+Check ( $names[0] -eq 'Palette' -and $names -contains 'Cycle Rate' -and $names -contains 'About' ) 'Palette first; Cycle Rate and About among them'
 
 if( $failures -gt 0 ) { Write-Host "`n  FAIL ($failures)"; exit 1 }
 Write-Host "`n  PASS"

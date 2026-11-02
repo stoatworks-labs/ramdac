@@ -296,7 +296,9 @@ purpose.
 ## Not done
 
 - **Never loaded into Resolume**, on either platform.
-  - Never built for Windows, so `tools/wincheck.ps1` is untested.
+  - `tools/wincheck.ps1` had never run until the first release dispatch (2026-11-02), and it
+    failed there on a check still asking for slitscan's `Mode` and `Scan Time`. The DLL
+    was fine. A copied check is only adapted once it has run.
   - No Arena gate expectation in plugin-bench.
 - No browser demo, presets or user guide yet.
 - **Not built:**
