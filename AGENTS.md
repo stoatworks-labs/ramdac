@@ -199,7 +199,8 @@ Assumed, not measured:
   with IEC 61966-2-1 and un-premultiplies per cell. A host that hands over linear or
   straight alpha would be read wrongly.
 - **The host's beat.** Cycle Sync reads `SetBeatInfo`'s bar phase and BPM, as the
-  fleet's other plugins do. It hasn't been measured in Arena.
+  fleet's other plugins do. It hasn't been watched following Arena's transport: the Arena
+  gate measures stills.
 - **Dot Diffusion's tone runs light.** On a two-colour palette over flat dark greys it
   drifts: 0.03 → 0.12 and 0.18 → 0.25 in linear light. `--diffusion` accounts for
   every bit of it: the barons' error, what goes off the edges, and what the clamp cut.
@@ -295,12 +296,18 @@ purpose.
 
 ## Not done
 
-- **Never loaded into Resolume**, on either platform.
+- **Never loaded into Resolume on macOS.**
+  - On Windows the release build passed the fleet's Arena gate in Arena 7.27.1 on win-lab
+    (llvmpipe, no GPU), twice (2026-11-02): 9 passed, 0 failed, 1 skipped, all 27 controls
+    as declared, 15 of the plugin's moving a still (7 under a precondition: Adaptive for
+    Colours, a half or whole swap for Order, Swap To and Swap Style, Forward for the cycle's
+    range and blend). Adapt, Cycle Rate, Cycle Sync, Freeze and Alpha are declared inert
+    there, and Custom, a text control, isn't probed. The expectation is plugin-bench's
+    `arena/expect/ramdac.json`; change it in the same commit as the controls.
   - `tools/wincheck.ps1` had never run until the first release dispatch (2026-11-02), and it
     failed there on a check still asking for slitscan's `Mode` and `Scan Time`. The DLL
     was fine. A copied check is only adapted once it has run.
-  - No Arena gate expectation in plugin-bench.
-- No browser demo, presets or user guide yet.
+- No browser demo or presets yet.
 - **Not built:**
   - several cycle ranges at once;
   - Floyd–Steinberg proper (serial both ways);

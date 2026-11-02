@@ -11,9 +11,10 @@
 > - Colour cycling rotates the table while the picture's indices stay still.
 > - Every dither holds still on a still clip, bit for bit.
 >
-> 11 negative controls and 35 one-character mutants prove the checks can fail. It has
-> **never been loaded into Resolume**, on either platform. The full rundown is under
-> [Status](#status).
+> 11 negative controls and 35 one-character mutants prove the checks can fail. On Windows
+> the release build has run in Resolume Arena, on software rendering, through the fleet's
+> Arena gate. It has **never been loaded into Resolume on macOS**. The full rundown is
+> under [Status](#status).
 
 Indexed colour, as an FFGL effect for [Resolume](https://resolume.com) Arena and Avenue.
 It forces a clip into the 4, 8 or 16 colours of a real machine (C64, CGA, Spectrum, CPC,
@@ -157,8 +158,8 @@ second over the whole table.
 
 ## Status
 
-**v0.1.0**, being prepared for its first release. Measured offline on one Mac
-(2026-11-02).
+**v0.1.0**, the first release. Measured offline on one Mac, and run in Resolume Arena on
+Windows. There's a [user guide](https://stoatworks-labs.com/software/ramdac/guide/).
 
 ### Measured offline, on macOS
 
@@ -198,6 +199,22 @@ Each tolerance is worked out from what can legitimately move a value:
 - **Near-ties:** decisions whose margin is smaller than the input's own rounding could move
   it are counted and left unjudged, never guessed.
 
+### In Resolume Arena, on Windows
+
+The fleet's Arena gate (`arena/` in plugin-bench) ran the release workflow's own Windows build
+in **Resolume Arena 7.27.1** on win-lab, a Windows VM with no GPU (Mesa's llvmpipe), twice. Both
+times the DLL loads and registers as `SW Ramdac`, `RM01`, an effect; all 27 controls (Arena's
+Opacity and the plugin's 26) arrive with the names, order, types, ranges and defaults declared;
+it renders; and Arena's log stays clean: **9 passed, 0 failed, 1 skipped**.
+
+Against Arena's still test picture, 15 of the plugin's controls measurably changed the frame.
+Palette, DAC, Dither, Dither Amount, Pixel Size, Swap, Cycle and Mix did at the defaults;
+Colours, Order, Swap To, Swap Style, Cycle Start, Cycle Length and Cycle Blend did once Adaptive,
+a swap or a cycle gave them something to act on. Adapt, Cycle Rate and Cycle Sync only set a
+pace, Freeze holds what a still already holds, and Alpha acts only on a clip with coverage below
+1, so a still, opaque picture can't measure those five; Custom, a text control, wasn't probed.
+Software rendering says nothing about a GPU, or about speed.
+
 ### Cost
 
 GPU time by `GL_TIME_ELAPSED`, median of 60 frames after a warm-up, at Pixel Size 2. The
@@ -220,9 +237,9 @@ more wall time. macOS figures only.
 
 ### Not established
 
-- **It's never been loaded into Resolume.** It has only been measured offline against
-  the plugin's own class in a headless CGL context, plus an `oxbow` load. It has never
-  been built for Windows.
+- **It's never been loaded into Resolume on macOS.** On a Mac it has only been measured
+  offline against the plugin's own class in a headless CGL context, plus an `oxbow` load.
+  On Windows, Arena has only run it on software rendering, on a still picture.
 - **Nobody has seen yet:**
   - how Cycle Sync follows Arena's transport;
   - what a GPU other than this Mac's makes of it;
@@ -236,7 +253,7 @@ more wall time. macOS figures only.
   exact).
 - **Adaptive follows the clip at Adapt seconds** (0.3 by default). A flash shorter than
   that is never fully reached, so set Adapt to 0 for a strobing clip.
-- No browser demo, presets or user guide.
+- No browser demo or presets.
 
 [AGENTS.md](AGENTS.md) lists what else is assumed.
 
