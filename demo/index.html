@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ramdac — browser demo | Stoatworks Labs</title>
+    <meta name="description" content="Try the Ramdac FFGL effect for Resolume in your browser: indexed colour from whatever clip you put through it — the 4, 8 or 16 colours of the C64, CGA, Spectrum, CPC, NES, Game Boy, PICO-8, teletext or the Amiga's Workbench, a palette you type, or one chosen from the clip — then palette swaps, fades and Deluxe Paint colour cycling. The plugin's own GLSL, ported to WebGL2 unedited, fed by a JavaScript port of its CPU half. A demo, not the plugin." />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./vendor/kit.css" />
+    <link rel="canonical" href="https://ramdac-demo.stoatworks-labs.com/" />
+  </head>
+  <body>
+    <main id="demo">
+      <noscript>
+        <p>
+          This demo runs the plugin's shaders and a port of its CPU half in your
+          browser, so it needs JavaScript and WebGL2. The plugin itself, its
+          source and its downloads are on
+          <a href="https://github.com/stoatworks-labs/ramdac">its repository</a>.
+        </p>
+      </noscript>
+    </main>
+
+    <script type="module" src="./plugin.js"></script>
+    <script
+      src="./vendor/support-footer.js"
+      defer
+      data-app="Ramdac"
+      data-repo="https://github.com/stoatworks-labs/ramdac"
+      data-note="A browser demo of the plugin's shaders over a port of its CPU half. Nothing you load here leaves your machine."
+    ></script>
+  </body>
+</html>

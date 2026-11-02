@@ -253,9 +253,21 @@ more wall time. macOS figures only.
   exact).
 - **Adaptive follows the clip at Adapt seconds** (0.3 by default). A flash shorter than
   that is never fully reached, so set Adapt to 0 for a strobing clip.
-- No browser demo or presets.
+- No presets.
 
 [AGENTS.md](AGENTS.md) lists what else is assumed.
+
+## Browser demo
+
+**<https://ramdac-demo.stoatworks-labs.com/>**: every palette, dither, swap and cycle, every
+control with its own name, group and default, over a generated clip or your own file. The
+shaders are the plugin's own GLSL and its tables the plugin's data, spliced unedited
+(`demo/tools/check_shaders.py`, run by `tools/verify.sh`); the CPU half is a JavaScript port,
+and `demo/tools/crosscheck/` renders it and `rmtest` over the same frames: in 24 cases, every
+dither, swap style and cycle mode, Adaptive, Custom, Freeze and both Alphas among them, every
+pixel is identical to the plugin's, and at Mix 0.5 within one level. There is no host beat in
+a browser, so Cycle Sync's Beat and Bar count the plugin's own 120 BPM. It is a demo, not the
+plugin, and says what it leaves out.
 
 ## Build
 

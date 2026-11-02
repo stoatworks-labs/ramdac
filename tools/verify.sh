@@ -65,7 +65,7 @@ step "GLSL: nothing WebGL2 lacks"
 # A browser demo would run these shaders unedited in WebGL2 (GLSL ES 3.00), as
 # the fleet's do, and the kit's port() translates spellings, never maths. These
 # built-ins arrived in GLSL 4.00 / ES 3.10 and compile everywhere here but
-# there. Ramdac has no demo yet; this keeps the door open.
+# there. demo/ is that page; this keeps it able to run them.
 if grep -nE '(^|[^A-Za-z_])(findMSB|findLSB|bitCount|bitfieldExtract|bitfieldInsert|bitfieldReverse|uaddCarry|usubBorrow|umulExtended|imulExtended|frexp|ldexp|fma|textureGather|textureQueryLevels|packUnorm4x8|unpackUnorm4x8)[[:space:]]*\(' source/Shaders.cpp | grep -vE '^[0-9]+:[[:space:]]*//' ; then
 	fail "a built-in GLSL ES 3.00 does not have is in the GLSL"
 fi
@@ -75,6 +75,17 @@ echo "   none"
 step "Shaders"
 #---------------------------------------------------------------------------
 tools/glslc.sh || fail "a shader does not compile"
+
+#---------------------------------------------------------------------------
+step "Browser demo"
+#---------------------------------------------------------------------------
+# The page runs the plugin's shaders on the plugin's tables: a shader, a palette,
+# the blue-noise mask or Knuth's matrix edited here and not spliced across would
+# leave it drawing something else and saying it is the plugin. The CPU half in
+# demo/plugin.js is a hand port: demo/tools/crosscheck/ compares the page's
+# pictures with rmtest's, and needs Chrome and a GPU, so it is run by hand
+# (AGENTS.md).
+python3 demo/tools/check_shaders.py || fail "the demo's shaders or tables have drifted from source/"
 
 #---------------------------------------------------------------------------
 step "Submodule"

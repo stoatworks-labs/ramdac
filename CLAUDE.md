@@ -71,7 +71,15 @@ table's swap/cycle arithmetic, or any tolerance in the harness.
 
 ## Not done yet
 - Never loaded into Resolume on macOS. On Windows the release build passed the fleet's Arena gate (Arena 7.27.1 on win-lab, software rendering), twice; plugin-bench's `arena/expect/ramdac.json` is its expectation.
-- No browser demo or presets. The user guide is `docs/USER-GUIDE.md` (and `.pdf`), built by the website's `scripts/build_guides.py ramdac`.
+- No presets. The user guide is `docs/USER-GUIDE.md` (and `.pdf`), built by the website's `scripts/build_guides.py ramdac`.
+
+## Browser demo
+- `demo/` is <https://ramdac-demo.stoatworks-labs.com> (a route, not a custom domain:
+  `wrangler.toml`). `.github/workflows/deploy.yml` deploys it on a push to main.
+- After a shader or table edit: `python3 demo/tools/check_shaders.py --write` (verify.sh fails on drift).
+- Locally: `python3 -m http.server -d demo`, or `npx wrangler dev` for the real `_headers`.
+- Against the plugin: `python3 demo/tools/crosscheck/crosscheck.py` (needs `build/rmtest` or
+  `build-verify/rmtest`, Chrome and a GPU). AGENTS.md has the gaps and the last figures.
 
 ## Diagnostics
 

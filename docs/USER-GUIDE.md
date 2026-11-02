@@ -383,8 +383,10 @@ Swap only changes the colours the indices look up.
 - **Adaptive waits for the GPU** each frame to read its summary of the picture back.
 - **sRGB in, sRGB out.** The plugin takes what Resolume hands it as sRGB-encoded.
 - **Bars are four beats.** Cycle Sync's *Bar* is four beats, whatever the music is doing.
-- **No presets** (Resolume saves parameter presets itself), no browser demo yet and no OpenFX
-  version.
+- **No presets** (Resolume saves parameter presets itself) and no OpenFX version. There is a
+  [browser demo](https://ramdac-demo.stoatworks-labs.com/) to try it before installing: the
+  plugin's own shaders and tables with every control, but a browser, not Resolume, so Cycle
+  Sync's Beat and Bar count a steady 120 BPM, and it says what it leaves out.
 
 ---
 

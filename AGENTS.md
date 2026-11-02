@@ -294,6 +294,48 @@ only acts in its context: Order only matters once something reads the index's or
 swap or a cycle), and Alpha only on a clip with coverage below 1. That run exits 1 on
 purpose.
 
+## The browser demo (2026-11-02)
+
+`demo/` is the page for <https://ramdac-demo.stoatworks-labs.com>, built to the fleet's
+`resolume-demo` kit rules (`~/Projects/resolume/specs/DEMO-BRIEF.md`) from slitscan's. What a
+reader of it must know:
+
+- **The shaders are the plugin's**: all eleven pieces plus kVersion, spliced by
+  `demo/tools/check_shaders.py --write` into `demo/shaders.js` and compared character for
+  character, with the JOIN on both sides (`Assemble( Pass )`, kPaletteCommon for analysis,
+  quantise and diffuse only, InitGL's eight stages, plugin.js's copy). All eight programs
+  compile in WebGL2 as spliced. The same script splices and checks `demo/tables.js`: the
+  blue-noise mask, Knuth's class matrix, the eleven published palettes, the Custom default
+  and the analysis grid's size. `tools/verify.sh` runs it.
+- **The CPU half is a port**, in double, between the PORT markers in `demo/plugin.js`:
+  Controls.cpp, the functions of Palettes.cpp, Clut.cpp, Adaptive.cpp and Dither.cpp's plan;
+  and between the FRAME markers, the CPU half of Ramdac.cpp. Change those and you change the
+  port too. Not ported: the clock-unit vote (the page's clock is seconds) and the
+  negative-control setters (Hooks stays 0).
+- **Every uniform is typed.** The kit's `Program.set()` sends glUniform1f, which on an
+  `int` is an error the shader never sees. plugin.js reads each program's active uniforms
+  back and its setters throw on a type mismatch. Shaders.cpp
+  declares 24 int or ivec2 uniforms and 12 samplers.
+- **Same formats**: grid, indices and classes RGBA16F, the analysis RGBA32F and read back
+  synchronously as floats (EXT_color_buffer_float, or the page stops and says so).
+- **No host tempo**: Cycle Sync's Beat and Bar count the plugin's own 120 BPM. The four
+  counts (FF_TYPE_INTEGER) are dropdowns of their ranges.
+- **The page's own `differences` list says all of this on the page.** Keep it true.
+
+How it was verified, and how to again (it needs this Mac's GPU and Chrome, so verify.sh does
+not run it): `python3 demo/tools/crosscheck/crosscheck.py [--size 1280x720]` renders 24
+cases through `rmtest --pipe --bpm 0` and through the page, 60 frames of rmtest's card, and
+compares the last. On 2026-11-02 (M4 Max, Chrome 156, ANGLE on Metal) every case was
+identical in every pixel at 640x360 and 1280x720, except Mix 0.5, about 22% of pixels one
+level apart (an 8-bit canvas against rmtest's rounded float framebuffer). Its negative (a
+cycling case one frame short) scored 55.3% and failed, and five port mutants failed it too:
+DitherIndex through the kit's float `set()`, the swap partner rounded instead of floored,
+the one-pole's step ×1.5, Knuth's weights swapped and the cycle's step snap at 0.3.
+
+Headless, the page loads with no console message on Chrome's Metal backend. On SwiftShader
+the Adaptive palette's synchronous read-back draws four "GPU stall due to ReadPixels"
+performance warnings, which is the read-back working as the plugin's does.
+
 ## Not done
 
 - **Never loaded into Resolume on macOS.**
@@ -307,7 +349,7 @@ purpose.
   - `tools/wincheck.ps1` had never run until the first release dispatch (2026-11-02), and it
     failed there on a check still asking for slitscan's `Mode` and `Scan Time`. The DLL
     was fine. A copied check is only adapted once it has run.
-- No browser demo or presets yet.
+- No presets yet. The browser demo is above.
 - **Not built:**
   - several cycle ranges at once;
   - Floyd–Steinberg proper (serial both ways);
